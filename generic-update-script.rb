@@ -4,6 +4,7 @@
 # It is intended to be used as a stop-gap until Dependabot's hosted instance
 # supports GitHub Enterprise and GitLab (coming soon!)
 
+require "pry"
 require "dependabot/file_fetchers"
 require "dependabot/file_parsers"
 require "dependabot/update_checkers"
