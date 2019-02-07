@@ -99,6 +99,7 @@ fetcher = Dependabot::FileFetchers.for_package_manager(package_manager).new(
 )
 
 files = fetcher.files
+symlinks = fetcher.symlinks
 commit = fetcher.commit
 
 ##############################
@@ -108,6 +109,7 @@ puts "Parsing dependencies information"
 parser = Dependabot::FileParsers.for_package_manager(package_manager).new(
   dependency_files: files,
   source: source,
+  symlinks: symlinks,
   credentials: credentials,
 )
 
@@ -120,8 +122,11 @@ dependencies.select(&:top_level?).each do |dep|
   checker = Dependabot::UpdateCheckers.for_package_manager(package_manager).new(
     dependency: dep,
     dependency_files: files,
+    symlinks: symlinks,
     credentials: credentials,
   )
+  require 'pry'
+  binding.pry
 
   next if checker.up_to_date?
 
